@@ -40,7 +40,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://drive.google.com/file/d/1gNQuK2_Z2BnFoHYKiYAdb8_PCo6w1GaB/view?usp=sharing"
+            href="https://drive.google.com/file/d/1pQ8f4GyYplanLwOrb8bJ_f9n7Ez7viMR/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 font-semibold px-6 py-3 rounded-lg transition-all flex items-center gap-2"
