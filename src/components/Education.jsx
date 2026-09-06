@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { AnimatedSection, staggerContainer, staggerItem } from "./AnimatedSection";
 
 const educationData = [
   {
@@ -23,7 +25,7 @@ const educationData = [
 
 export default function Education() {
   return (
-    <section
+    <AnimatedSection
       id="education"
       className="py-20 px-6 bg-slate-950 text-white border-t border-slate-800"
     >
@@ -32,11 +34,19 @@ export default function Education() {
           Education & Certifications
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid md:grid-cols-2 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {educationData.map((item) => (
-            <div
+            <motion.div
               key={item.id}
-              className="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col justify-between hover:border-cyan-500/50 transition-all"
+              variants={staggerItem}
+              whileHover={{ y: -4 }}
+              className="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col justify-between hover:border-cyan-500/50 transition-colors"
             >
               <div className="space-y-3">
                 <div className="flex justify-between items-start gap-2">
@@ -60,10 +70,10 @@ export default function Education() {
                   {item.details}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

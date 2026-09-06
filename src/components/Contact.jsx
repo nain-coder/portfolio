@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedSection } from "./AnimatedSection";
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -34,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <section
+    <AnimatedSection
       id="contact"
       className="py-20 px-6 bg-slate-950 text-white border-t border-slate-800"
     >
@@ -55,7 +57,7 @@ export default function Contact() {
               type="text"
               name="name"
               required
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white outline-none transition-colors focus:border-cyan-500"
             />
           </div>
 
@@ -67,7 +69,7 @@ export default function Contact() {
               type="email"
               name="email"
               required
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white outline-none transition-colors focus:border-cyan-500"
             />
           </div>
 
@@ -79,25 +81,36 @@ export default function Contact() {
               name="message"
               rows="4"
               required
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white outline-none transition-colors focus:border-cyan-500"
             ></textarea>
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-700 text-slate-950 font-bold py-3 rounded-lg transition-all"
+            whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+            whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+            className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-700 text-slate-950 font-bold py-3 rounded-lg transition-colors"
           >
             {isSubmitting ? "Sending..." : "Send Message"}
-          </button>
+          </motion.button>
 
-          {result && (
-            <p className="text-center text-sm font-medium text-cyan-400 pt-2">
-              {result}
-            </p>
-          )}
+          <AnimatePresence mode="wait">
+            {result && (
+              <motion.p
+                key={result}
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="text-center text-sm font-medium text-cyan-400 pt-2"
+              >
+                {result}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </form>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

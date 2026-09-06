@@ -1,9 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { projectsData } from "../data/projects";
+import { AnimatedSection, staggerContainer, staggerItem } from "./AnimatedSection";
 
 export default function Projects() {
   return (
-    <section
+    <AnimatedSection
       id="projects"
       className="py-20 px-6 bg-slate-900 text-white border-t border-slate-800"
     >
@@ -11,11 +13,19 @@ export default function Projects() {
         <h2 className="text-3xl font-bold text-center text-cyan-400">
           Featured Projects
         </h2>
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {projectsData.map((project) => (
-            <div
+            <motion.div
               key={project.id}
-              className="bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all"
+              variants={staggerItem}
+              whileHover={{ y: -6 }}
+              className="bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-700/60 hover:shadow-lg hover:shadow-cyan-500/5 transition-[border-color,box-shadow] duration-300"
             >
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-slate-100">
@@ -40,7 +50,7 @@ export default function Projects() {
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-slate-300 hover:text-cyan-400 text-sm font-semibold"
+                  className="text-slate-300 hover:text-cyan-400 text-sm font-semibold transition-colors"
                 >
                   GitHub Code →
                 </a>
@@ -48,15 +58,15 @@ export default function Projects() {
                   href={project.demo}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-slate-300 hover:text-cyan-400 text-sm font-semibold"
+                  className="text-slate-300 hover:text-cyan-400 text-sm font-semibold transition-colors"
                 >
                   Live Demo →
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

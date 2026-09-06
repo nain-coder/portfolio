@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { AnimatedSection, staggerContainer, staggerItem } from "./AnimatedSection";
 
 export default function TechStack() {
   const skills = [
@@ -15,7 +17,7 @@ export default function TechStack() {
   ];
 
   return (
-    <section
+    <AnimatedSection
       id="skills"
       className="py-20 px-6 bg-slate-950 text-white border-t border-slate-800"
     >
@@ -23,17 +25,25 @@ export default function TechStack() {
         <h2 className="text-3xl font-bold text-center text-cyan-400">
           Technical Skills
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {skills.map((skill) => (
-            <div
+            <motion.div
               key={skill}
-              className="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center font-medium hover:border-cyan-500 hover:text-cyan-400 transition-all cursor-default"
+              variants={staggerItem}
+              whileHover={{ y: -4, scale: 1.03 }}
+              className="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center font-medium hover:border-cyan-500 hover:text-cyan-400 transition-colors cursor-default"
             >
               {skill}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }
